@@ -67,18 +67,6 @@ namespace Microsoft.Azure.Commands.Network
         public virtual string Description { get; set; }
 
         [Parameter(
-           Mandatory = false,
-           ValueFromPipelineByPropertyName = true,
-           HelpMessage = "Group members.")]
-        public List<PSNetworkManagerGroupMembersItem> GroupMember { get; set; }
-
-        [Parameter(
-           Mandatory = false,
-           ValueFromPipelineByPropertyName = true,
-           HelpMessage = "Conditional members.")]
-        public string ConditionalMembership { get; set; }
-
-        [Parameter(
            Mandatory = true,
            ValueFromPipelineByPropertyName = true,
            HelpMessage = "Member type.")]
@@ -120,15 +108,6 @@ namespace Microsoft.Azure.Commands.Network
             var psNetworkGroup = new PSNetworkManagerGroup();
             psNetworkGroup.Name = this.Name;
             psNetworkGroup.MemberType = this.MemberType;
-            if(this.GroupMember!=null)
-            {
-                psNetworkGroup.GroupMembers = this.GroupMember;
-            }
-
-            if (!string.IsNullOrEmpty(this.ConditionalMembership))
-            {
-                psNetworkGroup.ConditionalMembership = this.ConditionalMembership;
-            }
 
             if (!string.IsNullOrEmpty(this.Description))
             {
