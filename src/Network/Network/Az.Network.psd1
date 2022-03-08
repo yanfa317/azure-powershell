@@ -547,9 +547,54 @@ CmdletsToExport = 'Add-AzApplicationGatewayAuthenticationCertificate',
                'Update-AzVirtualNetworkGatewayNatRule', 
                'Remove-AzVirtualNetworkGatewayNatRule', 
                'Get-AzVirtualHubBgpConnection', 'New-AzVirtualHubBgpConnection', 
-               'Remove-AzVirtualHubBgpConnection', 
-               'Update-AzVirtualHubBgpConnection', 
-               'New-AzPrivateEndpointIpConfiguration'
+               'Remove-AzVirtualHubBgpConnection',
+               'New-AzPrivateEndpointIpConfiguration',
+               'Update-AzVirtualHubBgpConnection', 'Get-AzNetworkManager', 
+               'New-AzNetworkManager', 'Remove-AzNetworkManager', 
+               'Get-AzNetworkManagerGroup', 'New-AzNetworkManagerGroup', 
+               'Remove-AzNetworkManagerGroup', 'Set-AzNetworkManagerGroup', 
+               'Get-AzNetworkManagerConnectivityConfiguration', 
+               'New-AzNetworkManagerConnectivityConfiguration', 
+               'Remove-AzNetworkManagerConnectivityConfiguration', 
+               'Set-AzNetworkManagerConnectivityConfiguration', 
+               'Get-AzNetworkManagerSecurityAdminConfiguration', 
+               'New-AzNetworkManagerSecurityAdminConfiguration', 
+               'Remove-AzNetworkManagerSecurityAdminConfiguration', 
+               'Set-AzNetworkManagerSecurityAdminConfiguration', 
+               'Get-AzNetworkManagerSecurityAdminRuleCollection', 
+               'New-AzNetworkManagerSecurityAdminRuleCollection', 
+               'Remove-AzNetworkManagerSecurityAdminRuleCollection', 
+               'Set-AzNetworkManagerSecurityAdminRuleCollection', 
+               'Get-AzNetworkManagerSecurityAdminRule', 
+               'New-AzNetworkManagerSecurityAdminRule', 
+               'Remove-AzNetworkManagerSecurityAdminRule', 
+               'Set-AzNetworkManagerSecurityAdminRule', 
+               'Get-AzNetworkManagerSecurityUserConfiguration', 
+               'New-AzNetworkManagerSecurityUserConfiguration', 
+               'Remove-AzNetworkManagerSecurityUserConfiguration', 
+               'Set-AzNetworkManagerSecurityUserConfiguration', 
+               'Get-AzNetworkManagerSecurityUserRuleCollection', 
+               'New-AzNetworkManagerSecurityUserRuleCollection', 
+               'Remove-AzNetworkManagerSecurityUserRuleCollection', 
+               'Set-AzNetworkManagerSecurityUserRuleCollection', 
+               'Get-AzNetworkManagerSecurityUserRule', 
+               'New-AzNetworkManagerSecurityUserRule', 
+               'Remove-AzNetworkManagerSecurityUserRule', 
+               'Set-AzNetworkManagerSecurityUserRule', 
+               'Get-AzNetworkManagerActiveConnectivityConfigurationList', 
+               'Get-AzNetworkManagerActiveSecurityAdminRuleList', 
+               'Get-AzNetworkManagerActiveSecurityUserRuleList', 
+               'Get-AzNetworkManagerEffectiveConnectivityConfigurationList', 
+               'Get-AzNetworkManagerEffectiveSecurityAdminRuleList', 
+               'Deploy-AzNetworkManagerCommit', 
+               'Get-AzNetworkManagerEffectiveVirtualNetworkList', 
+               'Get-AzNetworkManagerEffectiveVirtualNetworkByNetworkGroupList', 
+               'Get-AzNetworkManagerDeploymentStatusList', 
+               'New-AzNetworkManagerAddressPrefixItem', 
+               'New-AzNetworkManagerScope', 
+               'New-AzNetworkManagerSecurityGroupItem', 
+               'New-AzNetworkManagerGroupMembersItem', 'New-AzNetworkManagerHub', 
+               'New-AzNetworkManagerConnectivityGroupItem'
 
 # Variables to export from this module
 # VariablesToExport = @()
@@ -597,21 +642,61 @@ PrivateData = @{
         # IconUri = ''
 
         # ReleaseNotes of this module
-        ReleaseNotes = '* Added new property ''SqlSetting'' for Azure Firewall Policy cmdlets 
-    - ''Get-AzFirewallPolicy'' 
-    - ''New-AzFirewallPolicy''
-    - ''Set-AzFirewallPolicy''
-* Added new to create new ''SqlSetting'' object for creating Azure Firewall Policy
-    - ''New-AzFirewallPolicySqlSetting''
-* Added new cmdlet to support query Load Balancer inbound nat rule port mapping lists for backend addresses
-    - ''Get-AzLoadBalancerBackendAddressInboundNatRulePortMapping''
-    - Also updated cmdlets to support inbound nat rule V2 configurations
-        - ''New-AzLoadBalancerInboundNatRuleConfig''
-        - ''Set-AzLoadBalancerInboundNatRuleConfig''
-        - ''Add-AzLoadBalancerInboundNatRuleConfig'''
+        ReleaseNotes = '* Onboard Azure Virtual Network Manager Cmdlets for preview
+    - ''Get-AzNetworkManager'' 
+    - ''New-AzNetworkManager'' 
+    - ''Remove-AzNetworkManager'' 
+    - ''Get-AzNetworkManagerGroup'' 
+    - ''New-AzNetworkManagerGroup'' 
+    - ''Remove-AzNetworkManagerGroup'' 
+    - ''Set-AzNetworkManagerGroup'' 
+    - ''Get-AzNetworkManagerConnectivityConfiguration'' 
+    - ''New-AzNetworkManagerConnectivityConfiguration'' 
+    - ''Remove-AzNetworkManagerConnectivityConfiguration'' 
+    - ''Set-AzNetworkManagerConnectivityConfiguration'' 
+    - ''Get-AzNetworkManagerSecurityAdminConfiguration'' 
+    - ''New-AzNetworkManagerSecurityAdminConfiguration'' 
+    - ''Remove-AzNetworkManagerSecurityAdminConfiguration'' 
+    - ''Set-AzNetworkManagerSecurityAdminConfiguration'' 
+    - ''Get-AzNetworkManagerSecurityAdminRuleCollection'' 
+    - ''New-AzNetworkManagerSecurityAdminRuleCollection'' 
+    - ''Remove-AzNetworkManagerSecurityAdminRuleCollection'' 
+    - ''Set-AzNetworkManagerSecurityAdminRuleCollection'' 
+    - ''Get-AzNetworkManagerSecurityAdminRule'' 
+    - ''New-AzNetworkManagerSecurityAdminRule'' 
+    - ''Remove-AzNetworkManagerSecurityAdminRule'' 
+    - ''Set-AzNetworkManagerSecurityAdminRule'' 
+    - ''Get-AzNetworkManagerSecurityUserConfiguration'' 
+    - ''New-AzNetworkManagerSecurityUserConfiguration'' 
+    - ''Remove-AzNetworkManagerSecurityUserConfiguration'' 
+    - ''Set-AzNetworkManagerSecurityUserConfiguration'' 
+    - ''Get-AzNetworkManagerSecurityUserRuleCollection'' 
+    - ''New-AzNetworkManagerSecurityUserRuleCollection'' 
+    - ''Remove-AzNetworkManagerSecurityUserRuleCollection'' 
+    - ''Set-AzNetworkManagerSecurityUserRuleCollection'' 
+    - ''Get-AzNetworkManagerSecurityUserRule'' 
+    - ''New-AzNetworkManagerSecurityUserRule'' 
+    - ''Remove-AzNetworkManagerSecurityUserRule'' 
+    - ''Set-AzNetworkManagerSecurityUserRule'' 
+    - ''Get-AzNetworkManagerActiveConnectivityConfigurationList'' 
+    - ''Get-AzNetworkManagerActiveSecurityAdminRuleList'' 
+    - ''Get-AzNetworkManagerActiveSecurityUserRuleList'' 
+    - ''Get-AzNetworkManagerEffectiveConnectivityConfigurationList'' 
+    - ''Get-AzNetworkManagerEffectiveSecurityAdminRuleList'' 
+    - ''Get-AzNetworkManagerEffectiveSecurityAdminRuleList'' 
+    - ''Deploy-AzNetworkManagerCommit'' 
+    - ''Get-AzNetworkManagerEffectiveVirtualNetworkList'' 
+    - ''Get-AzNetworkManagerEffectiveVirtualNetworkByNetworkGroupList'' 
+    - ''Get-AzNetworkManagerDeploymentStatusList'' 
+    - ''New-AzNetworkManagerAddressPrefixItem'' 
+    - ''New-AzNetworkManagerScope'' 
+    - ''New-AzNetworkManagerSecurityGroupItem'' 
+    - ''New-AzNetworkManagerGroupMembersItem'' 
+    - ''New-AzNetworkManagerHub'' 
+    - ''New-AzNetworkManagerConnectivityGroupItem'''
 
         # Prerelease string of this module
-        # Prerelease = ''
+        Prerelease = 'preview'
 
         # Flag to indicate whether the module requires explicit user acceptance for install/update/save
         # RequireLicenseAcceptance = $false
