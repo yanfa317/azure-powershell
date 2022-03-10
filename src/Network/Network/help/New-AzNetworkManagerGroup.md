@@ -15,8 +15,7 @@ Creates a network manager group.
 ```
 New-AzNetworkManagerGroup -Name <String> -NetworkManagerName <String> -ResourceGroupName <String>
  [-DisplayName <String>] [-Description <String>]
- [-GroupMember <System.Collections.Generic.List`1[Microsoft.Azure.Commands.Network.Models.NetworkManager.PSNetworkManagerGroupMembersItem]>]
- [-ConditionalMembership <String>] -MemberType <String> [-IfMatch <String>] [-Force] [-AsJob]
+  -MemberType <String> [-IfMatch <String>] [-Force] [-AsJob]
  [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
@@ -27,11 +26,7 @@ The **New-AzNetworkManagerGroup** cmdlet creates a network manager group.
 
 ### Example 1
 ```powershell
-PS C:\> $resourceId = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/TestResourceGroup/providers/Microsoft.Network/virtualNetworks/TestVnet"
-PS C:\> $groupmem = New-AzNetworkManagerGroupMembersItem -ResourceId $resourceId
-PS C:\> [System.Collections.Generic.List[Microsoft.Azure.Commands.Network.Models.NetworkManager.PSNetworkManagerGroupMembersItem]]$groupMembers  = @()
-PS C:\> $groupMembers.Add($groupmem)
-PS C:\> New-AzNetworkManagerGroup -ResourceGroupName TestRGName -NetworkManagerName TestNetworkManagerName -Name TestNetworkGroupName -GroupMember $groupMembers -MemberType "Microsoft.Network/VirtualNetwork" -DisplayName "TestDISplayName" -Description "TestDescription"
+PS C:\> New-AzNetworkManagerGroup -ResourceGroupName TestRGName -NetworkManagerName TestNetworkManagerName -Name TestNetworkGroupName -MemberType "Microsoft.Network/VirtualNetwork" -DisplayName "TestDISplayName" -Description "TestDescription"
 
 ```
 
@@ -49,21 +44,6 @@ Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ConditionalMembership
-Conditional members.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
@@ -124,21 +104,6 @@ Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -GroupMember
-Group members.
-
-```yaml
-Type: System.Collections.Generic.List`1[Microsoft.Azure.Commands.Network.Models.NetworkManager.PSNetworkManagerGroupMembersItem]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 

@@ -593,8 +593,13 @@ CmdletsToExport = 'Add-AzApplicationGatewayAuthenticationCertificate',
                'New-AzNetworkManagerAddressPrefixItem', 
                'New-AzNetworkManagerScope', 
                'New-AzNetworkManagerSecurityGroupItem', 
-               'New-AzNetworkManagerGroupMembersItem', 'New-AzNetworkManagerHub', 
-               'New-AzNetworkManagerConnectivityGroupItem'
+               'New-AzNetworkManagerHub', 
+               'New-AzNetworkManagerConnectivityGroupItem',
+               'New-AzNetworkManagerStaticMember',
+               'Get-AzNetworkManagerStaticMember', 
+               'Remove-AzNetworkManagerStaticMember',
+               'Set-AzNetworkManagerStaticMember'
+               
 
 # Variables to export from this module
 # VariablesToExport = @()
@@ -690,10 +695,13 @@ PrivateData = @{
     - ''Get-AzNetworkManagerDeploymentStatusList'' 
     - ''New-AzNetworkManagerAddressPrefixItem'' 
     - ''New-AzNetworkManagerScope'' 
-    - ''New-AzNetworkManagerSecurityGroupItem'' 
-    - ''New-AzNetworkManagerGroupMembersItem'' 
-    - ''New-AzNetworkManagerHub'' 
-    - ''New-AzNetworkManagerConnectivityGroupItem'''
+    - ''New-AzNetworkManagerSecurityGroupItem''
+    - ''New-AzNetworkManagerHub''
+    - ''New-AzNetworkManagerConnectivityGroupItem''
+    - ''New-AzNetworkManagerStaticMember''
+    - ''Get-AzNetworkManagerStaticMember''
+    - ''Remove-AzNetworkManagerStaticMember''
+    - ''Set-AzNetworkManagerStaticMember'''
 
         # Prerelease string of this module
         Prerelease = 'preview'
