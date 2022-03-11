@@ -738,6 +738,10 @@ function Test-NetworkManagerScopeConnectionCRUD
 	}
 }
 
+<#
+.SYNOPSIS
+Tests creating/getting/deleting network manager connection on a subscription
+#>
 function Test-NetworkManagerSubscriptionConnectionCRUD
 {
     # Setup
@@ -746,7 +750,6 @@ function Test-NetworkManagerSubscriptionConnectionCRUD
 
     try{
         New-AzNetworkManagerSubscriptionConnection -Name $networkManagerConnectionName -NetworkManagerID $networkManagerId -Description "SampleDescription" 
-
         $networkManagerConnection = Get-AzNetworkManagerSubscriptionConnection -Name $networkManagerConnectionName
         Assert-NotNull $networkManagerConnection;
         Assert-AreEqual $networkManagerConnectionName $networkManagerConnection.Name;
@@ -760,5 +763,7 @@ function Test-NetworkManagerSubscriptionConnectionCRUD
         $job = Remove-AzNetworkManagerSubscriptionConnection -Name $networkManagerConnectionName -PassThru -Force -AsJob;
         $job | Wait-Job;
         $removeResult = $job | Receive-Job;
+	}
+    finally{
 	}
 }
