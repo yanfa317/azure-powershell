@@ -92,8 +92,8 @@ namespace Microsoft.Azure.Commands.Network
                 Name,
                 () =>
                 {
-                    var networkGroup = this.CreateNetworkManagerScopeConnection();
-                    WriteObject(networkGroup);
+                    var scopeConnection = this.CreateNetworkManagerScopeConnection();
+                    WriteObject(scopeConnection);
                 },
                 () => present);
         }
