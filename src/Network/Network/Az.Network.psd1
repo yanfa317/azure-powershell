@@ -717,7 +717,7 @@ PrivateData = @{
     - ''New-AzNetworkManagerScopeConnection''
     - ''Get-AzNetworkManagerScopeConnection''
     - ''Remove-AzNetworkManagerScopeConnection''
-    - ''Set-AzNetworkManagerScopeConnection''
+    - ''Set-AzNetworkManagerScopeConnection'''
 
         # Prerelease string of this module
         Prerelease = 'preview'
