@@ -46,6 +46,14 @@ namespace Commands.Network.Test.ScenarioTests
         [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         [Trait(Category.Owner, NrpTeamAlias.sdnnrp)]
+        public void TestNetworkManagerStaticMemberCRUD()
+        {
+            TestRunner.RunTestScript("Test-NetworkManagerStaticMemberCRUD");
+        }
+
+        [Fact]
+        [Trait(Category.AcceptanceType, Category.CheckIn)]
+        [Trait(Category.Owner, NrpTeamAlias.sdnnrp)]
         public void TestNetworkManagerConnectivityConfigurationCRUD()
         {
             TestRunner.RunTestScript("Test-NetworkManagerConnectivityConfigurationCRUD");
@@ -73,6 +81,22 @@ namespace Commands.Network.Test.ScenarioTests
         public void NetworkManagerEffectiveVirtualNetworkList()
         {
             TestRunner.RunTestScript("Test-NetworkManagerEffectiveVirtualNetworkList");
+        }
+
+        [Fact]
+        [Trait(Category.AcceptanceType, Category.CheckIn)]
+        [Trait(Category.Owner, NrpTeamAlias.sdnnrp)]
+        public void NetworkManagerScopeConnectionCRUD()
+        {
+            TestRunner.RunTestScript("Test-NetworkManagerScopeConnectionCRUD");
+        }
+
+        [Fact]
+        [Trait(Category.AcceptanceType, Category.CheckIn)]
+        [Trait(Category.Owner, NrpTeamAlias.sdnnrp)]
+        public void NetworkManagerSubcriptionConnectionCRUD()
+        {
+            TestRunner.RunTestScript("Test-NetworkManagerSubscriptionConnectionCRUD");
         }
     }
 }

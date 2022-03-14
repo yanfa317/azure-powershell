@@ -598,7 +598,15 @@ CmdletsToExport = 'Add-AzApplicationGatewayAuthenticationCertificate',
                'New-AzNetworkManagerStaticMember',
                'Get-AzNetworkManagerStaticMember', 
                'Remove-AzNetworkManagerStaticMember',
-               'Set-AzNetworkManagerStaticMember'
+               'Set-AzNetworkManagerStaticMember',
+	           'New-AzNetworkManagerSubscriptionConnection',
+               'Get-AzNetworkManagerSubscriptionConnection', 
+               'Remove-AzNetworkManagerSubscriptionConnection',
+               'Set-AzNetworkManagerSubscriptionConnection',
+               'New-AzNetworkManagerScopeConnection',
+               'Get-AzNetworkManagerScopeConnection', 
+               'Remove-AzNetworkManagerScopeConnection',
+               'Set-AzNetworkManagerScopeConnection'
                
 
 # Variables to export from this module
@@ -701,7 +709,15 @@ PrivateData = @{
     - ''New-AzNetworkManagerStaticMember''
     - ''Get-AzNetworkManagerStaticMember''
     - ''Remove-AzNetworkManagerStaticMember''
-    - ''Set-AzNetworkManagerStaticMember'''
+    - ''Set-AzNetworkManagerStaticMember''
+    - ''New-AzNetworkManagerSubscriptionConnection''
+    - ''Get-AzNetworkManagerSubscriptionConnection''
+    - ''Remove-AzNetworkManagerSubscriptionConnection''
+    - ''Set-AzNetworkManagerSubscriptionConnection''
+    - ''New-AzNetworkManagerScopeConnection''
+    - ''Get-AzNetworkManagerScopeConnection''
+    - ''Remove-AzNetworkManagerScopeConnection''
+    - ''Set-AzNetworkManagerScopeConnection''
 
         # Prerelease string of this module
         Prerelease = 'preview'

@@ -379,11 +379,12 @@ function Test-NetworkManagerSecurityAdminRuleCRUD
 
         $networkGroup = Get-AzNetworkManagerGroup -ResourceGroupName $rgname -NetworkManagerName $networkManagerName -Name $networkGroupName
 
-        New-AzNetworkManagerSecurityAdminConfiguration -ResourceGroupName $rgname -NetworkManagerName $networkManagerName -Name $SecurityConfigurationName -DisplayName "DISplayName" -Description "DESCription" -DeleteExistingNSG
+        New-AzNetworkManagerSecurityAdminConfiguration -ResourceGroupName $rgname -NetworkManagerName $networkManagerName -Name $SecurityConfigurationName -DisplayName "DISplayName" -Description "DESCription" -DeleteExistingNSG -NetworkIntentPolicyBasedService ["None"]
         
-        $securityConfig = Get-AzNetworkManagerSecurityAdminConfiguration -ResourceGroupName $rgname -NetworkManagerName $networkManagerName -Name $SecurityConfigurationName 
+        $securityConfig = Get-AzNetworkManagerSecurityAdminConfiguration -ResourceGroupName $rgname -NetworkManagerName $networkManagerName -Name $SecurityConfigurationName
         Assert-NotNull $securityConfig;
         Assert-AreEqual $SecurityConfigurationName $securityConfig.Name;
+        Assert-AreEqual ["None"] $securityConfig.NetworkIntentPolicyBasedService;
 
         $securityConfig.DisplayName = "sample Config DisplayName"
         $securityConfig = Set-AzNetworkManagerSecurityAdminConfiguration -ResourceGroupName $rgname -NetworkManagerName $networkManagerName -NetworkManagerSecurityAdminConfiguration $securityConfig
@@ -675,6 +676,93 @@ function Test-NetworkManagerEffectiveVirtualNetworkList
         Assert-AreEqual "/subscriptions/08615b4b-bc9c-4a70-be1b-2ea10bc97b52/resourceGroups/pstest/providers/Microsoft.Network/virtualNetworks/pstestvent" $vnetList.Value[0].Id 
         Assert-AreEqual $rglocation $vnetList.Value[0].Location 
         Assert-AreEqual "Dynamic" $vnetList.Value[0].MembershipType
+	}
+    finally{
+	}
+}
+
+<#
+.SYNOPSIS
+Tests creating new simple public network manager scope connection
+#>
+function Test-NetworkManagerScopeConnectionCRUD
+{
+    # Setup
+    # Need to update $subscriptionId and vnetid before running in live mode
+    $rgName = Get-ResourceGroupName
+    $networkManagerName = Get-ResourceName
+    $scopeConnectionName = Get-ResourceName
+    $rglocation = "centraluseuap"
+    $subscriptionId = "/subscriptions/08615b4b-bc9c-4a70-be1b-2ea10bc97b52"
+
+    try{
+        #Create the resource group
+        $resourceGroup = New-AzResourceGroup -Name $rgname -Location $rglocation -Tags @{ testtag = "testval" } 
+        
+        # Create Scope
+        [System.Collections.Generic.List[string]]$group  = @()
+        $group.Add($subscriptionId)
+        [System.Collections.Generic.List[String]]$access  = @()
+        $access.Add("Connectivity");
+        $scope = New-AzNetworkManagerScope -Subscription $group
+        New-AzNetworkManager -ResourceGroupName $rgname -Name $networkManagerName -NetworkManagerScope $scope -NetworkManagerScopeAccess $access -Location $rglocation
+
+        $networkManager = Get-AzNetworkManager -ResourceGroupName $rgname -Name $networkManagerName
+        Assert-NotNull $networkManager;
+        Assert-AreEqual $networkManagerName $networkManager.Name;
+        Assert-AreEqual $rglocation $networkManager.Location;
+
+        New-AzNetworkManagerScopeConnection -ResourceGroupName $rgname -NetworkManagerName $networkManagerName -Name $scopeConnectionName -TenantId "72f988bf-86f1-41af-91ab-2d7cd011db47" -ResourceId $subscriptionId -Description "SampleDescription" 
+
+        $scopeConnection = Get-AzNetworkManagerScopeConnection -ResourceGroupName $rgname -NetworkManagerName $networkManagerName -Name $scopeConnectionName 
+        Assert-NotNull $scopeConnection;
+        Assert-AreEqual $scopeConnectionName $scopeConnection.Name;
+
+        $scopeConnection.Description = "A Different Description."
+        $newScopeConnection = Set-AzNetworkManagerScopeConnection -ResourceGroupName $rgname -NetworkManagerName $networkManagerName -NetworkManagerScopeConnection $scopeConnection
+        Assert-NotNull $newScopeConnection;
+        Assert-AreEqual "A Different Description." $newScopeConnection.Description;
+        Assert-AreEqual $scopeConnectionName $newScopeConnection.Name;
+
+        $job = Remove-AzNetworkManagerScopeConnection -ResourceGroupName $rgname -NetworkManagerName $networkManagerName -Name $scopeConnectionName -PassThru -Force -AsJob;
+        $job | Wait-Job;
+        $removeResult = $job | Receive-Job;
+
+        $job = Remove-AzNetworkManager -ResourceGroupName $rgname -Name $networkManagerName -PassThru -Force -AsJob;
+        $job | Wait-Job;
+        $removeResult = $job | Receive-Job;
+	}
+    finally{
+        # Cleanup
+        Clean-ResourceGroup $rgname
+	}
+}
+
+<#
+.SYNOPSIS
+Tests creating/getting/deleting network manager connection on a subscription
+#>
+function Test-NetworkManagerSubscriptionConnectionCRUD
+{
+    # Setup
+    $networkManagerConnectionName = Get-ResourceName
+    $networkManagerId = "/subscriptions/08615b4b-bc9c-4a70-be1b-2ea10bc97b52/resourceGroups/PSTestResources/providers/Microsoft.Network/networkManagers/PSTestNM"
+
+    try{
+        New-AzNetworkManagerSubscriptionConnection -Name $networkManagerConnectionName -NetworkManagerID $networkManagerId -Description "SampleDescription" 
+        $networkManagerConnection = Get-AzNetworkManagerSubscriptionConnection -Name $networkManagerConnectionName
+        Assert-NotNull $networkManagerConnection;
+        Assert-AreEqual $networkManagerConnectionName $networkManagerConnection.Name;
+
+        $networkManagerConnection.Description = "A Different Description."
+        $newNetworkManagerConnection = Set-AzNetworkManagerSubscriptionConnection -NetworkManagerSubscriptionConnection $networkManagerConnection
+        Assert-NotNull $newNetworkManagerConnection;
+        Assert-AreEqual "A Different Description." $newNetworkManagerConnection.Description;
+        Assert-AreEqual $networkManagerConnectionName $newNetworkManagerConnection.Name;
+
+        $job = Remove-AzNetworkManagerSubscriptionConnection -Name $networkManagerConnectionName -PassThru -Force -AsJob;
+        $job | Wait-Job;
+        $removeResult = $job | Receive-Job;
 	}
     finally{
 	}

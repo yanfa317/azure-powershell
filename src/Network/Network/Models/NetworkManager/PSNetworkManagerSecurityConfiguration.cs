@@ -17,11 +17,14 @@
 namespace Microsoft.Azure.Commands.Network.Models.NetworkManager
 {
     using System.Collections;
+    using System.Collections.Generic;
     using WindowsAzure.Commands.Common.Attributes;
 
     public class PSNetworkManagerSecurityConfiguration : PSNetworkManagerBaseResource
     {
         public string SecurityType { get; set; }
+
+        public List<string> NetworkIntentPolicyBasedService { get; set; }
 
         public string DeleteExistingNSGs { get; set; }
     }
