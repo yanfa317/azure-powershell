@@ -437,7 +437,7 @@ function Test-NetworkManagerSecurityAdminRuleCRUD
         [System.Collections.Generic.List[String]]$regions = @()  
         $regions.Add($rglocation)
         Deploy-AzNetworkManagerCommit -ResourceGroupName $rgname -Name $networkManagerName -TargetLocation $regions -ConfigurationId $configids -CommitType "SecurityAdmin" 
-        Start-Sleep -Seconds 600
+        #Start-Sleep -Seconds 600
        
         $deploymentStatus = Get-AzNetworkManagerDeploymentStatusList -ResourceGroupName $rgname -NetworkManagerName $networkManagerName -Region $regions -DeploymentType "SecurityAdmin"
         Assert-NotNull $deploymentStatus;
@@ -488,7 +488,7 @@ function Test-NetworkManagerSecurityAdminRuleCRUD
         Assert-AreEqual "Internet" $effectiveSecurityAdminRule.Value[0].Sources[0].AddressPrefix
 
         Deploy-AzNetworkManagerCommit -ResourceGroupName $rgname -Name $networkManagerName -TargetLocation $regions -CommitType "SecurityAdmin" 
-        Start-Sleep -Seconds 600
+        #Start-Sleep -Seconds 600
 
         $job = Remove-AzNetworkManagerSecurityAdminRule -ResourceGroupName $rgname -NetworkManagerName $networkManagerName -SecurityAdminConfigurationName $SecurityConfigurationName -RuleCollectionName $RuleCollectionName -Name $RuleName -PassThru -Force -AsJob;
         $job | Wait-Job;
